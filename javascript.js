@@ -1,4 +1,6 @@
 const myLibrary = []; // An array of books in the library 
+const tableBody = document.querySelector("tbody");
+
 
 function Book(name, author, number_of_pages, read){
     //the constructor for Books to be added to the library//
@@ -10,31 +12,36 @@ function Book(name, author, number_of_pages, read){
 }
 
 
-Book.prototype.toLibrary = function(){
-    //adding books to the library //
-    myLibrary.push(this)
-};
-
-const Book1 = new Book("General Mathematics", "Ayodeji Owoeye", 600, true);
-Book1.toLibrary()
-
-const Book2 = new Book("English for Arts", "Moji Owoeye", 368, false)
-Book2.toLibrary()
-
-function displayBook(ID){
-    
-    for(let i = 0; i < (myLibrary.length -1); i++){
-        if (myLibrary[i].ID ===ID){
-            return myLibrary[i] 
-        }
-        else{
-            return "Book not found "
-        }
-    }
+function addBook (item){
+    //add books to the library folder 
+    myLibrary.push(item)
+    return item 
+      
 }
 
+function dispTable(myLibrary, tableBody){
+    //displays books in the array with the table//
+    for (let book of myLibrary){
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td>${book.ID}</td>
+        <td>${book.name}</td>
+        <td>${book.author}</td>
+        <td>${book.number_of_pages}</td>
+        <td>${book.read}</td>`
+        tableBody.appendChild(row)
 
-console.log(myLibrary)
 
-console.log(displayBook(Book1.ID))
+    }
+    return tableBody
+}
+    
+const item1 = new Book("AYod", "you", 54, true)
+const item2 = new Book("Tedi", "Tat", 56, false)
+
+addBook(item1)
+addBook(item2)
+
+
+console.log(dispTable(myLibrary, tableBody)) 
 
