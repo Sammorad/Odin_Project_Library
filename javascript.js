@@ -4,22 +4,24 @@ const newBook = document.querySelector(".new-bk");
 const viewBook = document.querySelector(".view")
 
 
-function Book(name, author, number_of_pages,read){
-    //the constructor for Books to be added to the library//
-    this.ID = crypto.randomUUID()
-    this.name = name;
-    this.author = author;
-    this.number_of_pages = number_of_pages;
-    this.read = read
-}
+class Book{
+    //a class for book and its basic operations//
+    constructor(name, author, number_of_pages, read){
+        this.ID = crypto.randomUUID();
+        this.author = author;
+        this.name = name;
+        this.number_of_pages = number_of_pages;
+        this.read = read;
+    }
 
 
-function addBook (item){
-    //add books to the library folder 
-    myLibrary.push(item)
-    return item 
-      
+    addBook(){
+        //a method to add books to the library//
+        myLibrary.push(this)
+
+    }
 }
+
 const ifReadBtn = document.createElement("button");//created a button to assert if the book as been read//
         ifReadBtn.textContent = "Book read"
 function dispTable(myLibrary, tableBody){
@@ -85,9 +87,12 @@ form.addEventListener("submit", (event)=>{
  
 
     const item = new Book(name01, author01, pages01, readStatus)
-    addBook(item)
+    item.addBook()
+    
 
     //also check the read checkbox if clicked 
+
+    
    
 
     
